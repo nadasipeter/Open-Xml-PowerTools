@@ -1,4 +1,7 @@
-﻿/***************************************************************************
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+/***************************************************************************
 
 Copyright (c) Microsoft Corporation 2016.
 
@@ -76,7 +79,7 @@ namespace OpenXmlPowerTools.Tests
             List<XElement> textRuns = UnicodeMapper.StringToCoalescedRunList(textString, null);
             List<XElement> mixedRuns = UnicodeMapper.StringToCoalescedRunList(mixedString, null);
 
-            Assert.Equal(1, textRuns.Count);
+            Assert.Single(textRuns);
             Assert.Equal(5, mixedRuns.Count);
 
             Assert.Equal("First", mixedRuns.Elements(W.t).Skip(0).First().Value);

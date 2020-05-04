@@ -1,20 +1,5 @@
-﻿/***************************************************************************
-
-Copyright (c) Microsoft Corporation 2012-2015.
-
-This code is licensed using the Microsoft Public License (Ms-PL).  The text of the license can be found here:
-
-http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-
-Published at http://OpenXmlDeveloper.org
-Resource Center and Documentation: http://openxmldeveloper.org/wiki/w/wiki/powertools-for-open-xml.aspx
-
-Developer: Eric White
-Blog: http://www.ericwhite.com
-Twitter: @EricWhiteDev
-Email: eric@ericwhite.com
-
-***************************************************************************/
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Collections.Generic;
@@ -24,7 +9,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using DocumentFormat.OpenXml.Packaging;
 
@@ -81,7 +65,7 @@ namespace OpenXmlPowerTools
             if (splitFormatCode.Length == 1)
             {
                 double dv;
-                if (double.TryParse(value, out dv))
+                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out dv))
                 {
                     return FormatDouble(formatCode, dv, out color);
                 }
@@ -90,7 +74,7 @@ namespace OpenXmlPowerTools
             if (splitFormatCode.Length == 2)
             {
                 double dv;
-                if (double.TryParse(value, out dv))
+                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out dv))
                 {
                     if (dv > 0)
                     {
@@ -109,7 +93,7 @@ namespace OpenXmlPowerTools
             if (splitFormatCode.Length == 4)
             {
                 double dv;
-                if (double.TryParse(value, out dv))
+                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out dv))
                 {
                     if (dv > 0)
                     {
@@ -211,7 +195,7 @@ namespace OpenXmlPowerTools
 
 
             if (formatCode == "General")
-                return dv.ToString();
+                return dv.ToString(CultureInfo.InvariantCulture);
             bool isDate = IsFormatCodeForDate(formatCode);
             var cfc = ConvertFormatCode(formatCode);
             if (isDate)
@@ -223,7 +207,7 @@ namespace OpenXmlPowerTools
                 }
                 catch (ArgumentException)
                 {
-                    return dv.ToString();
+                    return dv.ToString(CultureInfo.InvariantCulture);
                 }
                 if (cfc.StartsWith("[h]"))
                 {
@@ -239,23 +223,23 @@ namespace OpenXmlPowerTools
                     var s4 = thisDate.ToString(cfc2).Trim();
                     return s4;
                 }
-                var s2 = thisDate.ToString(cfc).Trim();
+                var s2 = thisDate.ToString(cfc, CultureInfo.InvariantCulture).Trim();
                 return s2;
             }
             if (ExcelFormatCodeToNetFormatCodeExceptionMap.ContainsKey(formatCode))
             {
                 FormatConfig fc = ExcelFormatCodeToNetFormatCodeExceptionMap[formatCode];
-                var s = dv.ToString(fc.FormatCode).Trim();
+                var s = dv.ToString(fc.FormatCode, CultureInfo.InvariantCulture).Trim();
                 return s;
             }
             if ((cfc.Contains('(') && cfc.Contains(')')) || cfc.Contains('-'))
             {
-                var s3 = (-dv).ToString(cfc).Trim();
+                var s3 = (-dv).ToString(cfc, CultureInfo.InvariantCulture).Trim();
                 return s3;
             }
             else
             {
-                var s4 = dv.ToString(cfc).Trim();
+                var s4 = dv.ToString(cfc, CultureInfo.InvariantCulture).Trim();
                 return s4;
             }
         }

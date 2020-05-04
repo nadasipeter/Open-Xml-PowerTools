@@ -1,4 +1,30 @@
-﻿Open-XML-PowerTools
+﻿NuGet Feed for CI build: https://ci.appveyor.com/nuget/open-xml-powertools
+
+No NuGet.org feed at this time. We are working on it.
+
+News
+====
+Welcome, Open-Xml-PowerTools users.  As you may have learned from the repo at OfficeDev/Open-Xml-PowerTools,
+Microsoft is going to archive that repo, and will not be maintaining that repo in the future.  The good folks at
+Microsoft asked if I would maintain this repo going forward, and I said "yes, absolutely".
+
+There are two relevant branches in this repo:
+- I have merged vNext into master.  If you were using the OfficeDev/Open-Xml-PowerTools vNext branch, and if you want to
+keep using the same code, use the master branch.
+- As of right now, the vNext branch is even with master.  However, that is going to change in the next day or two - I am
+going to commit the updated, refactored DocumentAssembler.
+
+Unfortunately, this development came right as I am starting a 10-day vacation, so will need to balance making the necessary
+enhancements with my other vacation activities!  But stay tuned, I expect to make progress in the next couple of days.
+
+I will post major announcements here in the README.md, but if you want to stay more abreast of developments, follow my blog
+at [www.ericwhite.com/blog](http://www.ericwhite.com/blog).  Also, follow me on twitter: @EricWhiteDev.
+
+Warm Regards,
+
+Eric White
+
+Open-XML-PowerTools
 ===================
 The Open XML PowerTools provides guidance and example code for programming with Open XML
 Documents (DOCX, XLSX, and PPTX).  It is based on, and extends the functionality
@@ -20,9 +46,10 @@ It supports scenarios such as:
 - Extracting data (along with formatting) from spreadsheets.
 
 Copyright (c) Microsoft Corporation 2012-2017
-Portions Copyright (c) Eric White 2016-2017
-Licensed under the Microsoft Public License.
-See License.txt in the project root for license information.
+Portions Copyright (c) Eric White Inc 2018-2019
+
+Licensed under the MIT License.
+See License in the project root for license information.
 
 News
 ====
@@ -37,61 +64,36 @@ Open-Xml-PowerTools Content
 There is a lot of content about Open-Xml-PowerTools at the [Open-Xml-PowerTools Resource Center at OpenXmlDeveloper.org](http://openxmldeveloper.org/wiki/w/wiki/powertools-for-open-xml.aspx)
 
 See:
-- [DocumentBuilder Resource Center](http://openxmldeveloper.org/wiki/w/wiki/documentbuilder.aspx)
-- [PresentationBuilder Resource Center](http://openxmldeveloper.org/wiki/w/wiki/presentationbuilder.aspx)
-- [HtmlConverter Resource Center](http://openxmldeveloper.org/wiki/w/wiki/htmlconverter.aspx)
-- [Introduction to DocumentAssembler](https://www.youtube.com/watch?v=9QqzCgfqA2Y)
-- [Contributing to Open-Xml-PowerTools via GitHub](https://www.youtube.com/watch?v=Ii7z9L6Dkko)
-- [Gitting, Building, and Installing Open-Xml-PowerTools](https://www.youtube.com/watch?v=60w-yPDSQD0)
+- [DocumentBuilder Resource Center](http://www.ericwhite.com/blog/documentbuilder-developer-center/)
+- [PresentationBuilder Resource Center](http://www.ericwhite.com/blog/presentationbuilder-developer-center/)
+- [WmlToHtmlConverter Resource Center](http://www.ericwhite.com/blog/wmltohtmlconverter-developer-center/)
+- [DocumentAssembler Resource Center](http://www.ericwhite.com/blog/documentassembler-developer-center/)
 
 Build Instructions
 ==================
 
-Recently, we've updated the GitHub repo so that it pulls the Open-Xml-Sdk via NuGet.  The video at the following link shows how to clone and build the Open-Xml-PowerTools
-when pulling the Open-Xml-Sdk via NuGet.  It uses Visual Studio 2017 Community Edition.
+**Prerequisites:**
 
-[Build Open-Xml-PowerTools](http://ericwhite.com/blog/2017/03/24/building-open-xml-powertools-when-pulling-the-open-xml-sdk-via-nuget/)
+- Visual Studio 2017 Update 5 or .NET CLI toolchain
 
-The following instructions are somewhat outdated at this point.
+**Build**
+ 
+ With Visual Studio:
 
-For this release, you need Visual Studio 2013 or 2015 installed.  The following video shows gitting and building the Open-Xml-Sdk and
-Open-Xml-PowerTools using [Visual Studio 2015 Community Edition](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx), which is free.
-
-If you are using Visual Studio 2013, make sure that you have **Update 4 for Visual Studio 2013**.  Previous versions of Visual Studio 2013 do not work.
-
-You can use Visual Studio 2012 to build the Open-Xml-Sdk and Open-Xml-PowerTools libraries and run the examples.  The xUnit tests do not work with Visual Studio 2012.
-
-The following video walks through the process building Open-Xml-PowerTools:
-
-[Installing, Building, and Running Open-Xml-PowerTools 4.0](https://www.youtube.com/watch?v=60w-yPDSQD0)
-
-In order to build Open-Xml-PowerTools 4.0 and later, you need to retrieve both the Open-Xml-Sdk and the Open-Xml-PowerTools repos from GitHub.  The projects are set up expecting that
-the Open-Xml-Sdk repo and the Open-Xml-PowerTools repo are siblings to each other in the file system.  The Open-Xml-PowerTools projects
-look for the Open-Xml-Sdk in a directory with that exact name (Open-Xml-Sdk).
-
-If you want to use the Open-Xml-PowerTools Cmdlets, one easy way to do this is to put both the Open-Xml-Sdk and the Open-Xml-PowerTools repos in
-the ~/Documents/WindowsPowerShell/Modules directory.  PowerShell by default looks for modules in this directory, so if we place these repos in this
-directory, after building the Open-Xml-Sdk, we can import the Open-Xml-PowerTools module and start using the Cmdlets.  If the WindowsPowerShell/Modules directory
-doesn't exist, you can create it.
-
-If you don't care about the Open-Xml-PowerTools Cmdlets, then you can put the two repos into any directory you like, so long as you make them
-siblings to each other.
-
-The short form of the installation instructions are:
-- Make sure you are running PowerShell 3.0 or later
-- If necessary, set your execution policy.  Run PowerShell as administrator and Set-ExecutionPolicy Unrestricted (or RemoteSigned)
-- cd ~/Documents/WindowsPowerShell/Modules
-- git clone https://github.com/OfficeDev/Open-Xml-Sdk
-- git clone https://github.com/OfficeDev/Open-Xml-PowerTools
-- Using Visual Studio, open Open-Xml-Sdk/Open-XML-SDK.sln
-- Build the solution.  To validate the build, open the Test Explorer (pick TEST -> Windows -> Test Explorer from the menu).  Click Run All.
-- To start using the Open-Xml-PowerTools Cmdlets, in PowerShell, Import-Module Open-Xml-PowerTools
-- Using Visual Studio, open Open-Xml-PowerTools/OpenXmlPowerToolsExamples.sln
+- Open `OpenXmlPowerTools.sln` in Visual Studio
+- Rebuild the project
 - Build the solution.  To validate the build, open the Test Explorer.  Click Run All.
 - To run an example, set the example as the startup project, and press F5.
 
+With .NET CLI toolchain:
+
+- Run `dotnet build OpenXmlPowerTools.sln`
+
 Change Log
 ==========
+
+Version 4.5 : January 21, 2020
+- Various changes and fixes to DocumentBuilder
 
 Version 4.3 : June 13, 2016
 - New WmlComparer module
@@ -205,19 +207,4 @@ Version 3.1.00 : November 13, 2014
 Version 3.0.00 : October 29, 2014
 - New release of cmdlets that are written as 'Advanced Functions' instead of in C#.
 
-Procedures for enhancing Open-Xml-PowerTools
---------------------------------------------
-There are a variety of things to do when adding a new CmdLet to Open-Xml-PowerTools:
-- Write the new CmdLet.  Put it in the Cmdlets directory
-- Modify Open-Xml-PowerTools.psm1
-  - Call the new Cmdlet script to make the function available
-  - Modify Export-ModuleMember function to export the Cmdlet and any aliases
-- Update Readme.txt, describing the enhancement
-- Add a new test to Test-OpenXmlPowerToolsCmdlets.ps1
-
-Procedures for enhancing the core C# modules
-- Modify the code
-- Write xUnit tests
-- Write an example if necessary
-- Run xUnit tests on VS2015 Community Edition
-- Run xUnit tests on VS2013 Update 4
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.

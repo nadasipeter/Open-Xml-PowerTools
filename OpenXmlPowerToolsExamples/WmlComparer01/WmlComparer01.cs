@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +27,7 @@ namespace OpenXmlPowerTools
                 settings);
             result.SaveAs(Path.Combine(tempDi.FullName, "Compared.docx"));
 
-            var revisions = WmlComparer.GetRevisions(result);
+            var revisions = WmlComparer.GetRevisions(result, settings);
             foreach (var rev in revisions)
             {
                 Console.WriteLine("Author: " + rev.Author);

@@ -1,14 +1,5 @@
-//
-// Copyright 2017 Thomas Barnekow
-//
-// This code is licensed using the Microsoft Public License (Ms-PL). The text of the
-// license can be found here:
-//
-// http://www.microsoft.com/resources/sharedsource/licensingbasics/publiclicense.mspx
-//
-// Developer: Thomas Barnekow
-// Email: thomas@barnekow.info
-//
+// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Collections.Generic;
@@ -49,7 +40,7 @@ namespace OpenXmlPowerTools.Tests
                         // Assert that we can see the paragraph added through the PowerTools.
                         Body body = part.Document.Body;
                         List<Paragraph> paragraphs = body.Elements<Paragraph>().ToList();
-                        Assert.Equal(1, paragraphs.Count);
+                        Assert.Single(paragraphs);
                         Assert.Equal("Added through PowerTools", paragraphs[0].InnerText);
 
                         // Add a paragraph through the SDK.
